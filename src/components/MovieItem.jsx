@@ -6,8 +6,8 @@ import {
     StarFilled
 } from '@ant-design/icons';
 import { Popover, Button } from 'antd';
-import { Tag, Divider } from 'antd';
-import { host } from '../config';
+import { Tag, Divider,Card} from 'antd';
+import { genMovieUrl, host } from '../config';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -95,18 +95,21 @@ const content = (movieInfo) => {
 }
 
 const MovieItem = () => {
+    const { Meta } = Card;
     return (
-        <div style={{ height: 250, width: 150 }}>
-            <Popover content={content.bind(this, info)} title="电影名" placement="right" >
-                <img src={logo} alt="" style={{ "height": '75%', "width": '100%' }} />
-            </Popover>
-            <div style={{ textAlign: 'center' }}>
-                <div>电影名</div>
+        <Popover content={content.bind(this, info)} title="电影名" placement="right" >
+            <Card style={{ width: 150}} cover={<img src={genMovieUrl(info['image'])} alt="" />} bodyStyle={{padding:6}}>
+                {/* <Meta title="Europe Street beat" description="www.instagram.com" /> */}
+                <div style={{ textAlign: 'center'}}>
+                <Link to={'/movies/'+info['_id']}>
+                    <div>{info['name']}</div>
+                </Link>
                 <div>
                     <StarTwoTone /> <span>{info['aggregateRating']['ratingValue'].toFixed(1)}</span>
                 </div>
-            </div>
-        </div>
+                </div>
+            </Card>
+        </Popover>
     )
 }
 

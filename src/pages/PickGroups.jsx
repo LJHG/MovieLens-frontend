@@ -101,8 +101,8 @@ const PickGroups = () => {
           <Statistic value={Npoints} style={{ width: "50px", paddingLeft: "10px" }} formatter={(value) => <span style={{ color: "#F06624" }}>{value}</span>} />
         </div>
       </PageHeader>
+      <MovieItem/>
       <div style={{ padding: "0 24px" }}>
-        <MovieItem/>
         <Row gutter={[16, 16]}>
           {
             groups.map((item, index) => {
