@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PageHeader from "../components/PageHeader";
 import { Row, Col } from 'antd';
 import { Divider } from 'antd';
@@ -21,6 +21,27 @@ const groups = [
 const PickGroups = () =>{
 
     const points = [0,0,0,0,0,0]
+
+    const [moviesData,setMoviesData] = useState([
+        [{'image':'','name':''},{'image':'','name':''},{'image':'','name':''}],
+        [{'image':'','name':''},{'image':'','name':''},{'image':'','name':''}],
+        [{'image':'','name':''},{'image':'','name':''},{'image':'','name':''}],
+        [{'image':'','name':''},{'image':'','name':''},{'image':'','name':''}],
+        [{'image':'','name':''},{'image':'','name':''},{'image':'','name':''}],
+        [{'image':'','name':''},{'image':'','name':''},{'image':'','name':''}],
+    ])
+    
+
+    useEffect(()=>{
+        //获取6类18部电影的相关信息
+        axios.get(host+'/profile/setting/get-groups-info').then(res=>{
+            console.log(res.data.data);
+            setMoviesData(res.data.data);
+        }).catch((e)=>{
+            alert(e)
+        })
+    },[])
+
 
     function onChange(index,value) {
         console.log('changed index', index);
@@ -71,21 +92,18 @@ const PickGroups = () =>{
                         <Card title={item['tags'][0]+"  "+item['tags'][1] +"  "+item['tags'][2]} style={{ width: 500 }}>
                             <div>
                                 <div style={{"display":"inline","float":"left","margin":30}}>
-                                    <img src={logo} alt="picture" style={{"height":70,"width":60}}/>
-                                    {/* 图片 */}
-                                    <div>电影名</div>
+                                    <img src={moviesData[index][0]['image']} alt="picture" style={{"height":70,"width":60}}/>
+                                    <div>{moviesData[index][0]['name']}</div>
                                 </div>
                                 
                                 <div style={{"display":"inline","float":"left","margin":30}}>
-                                    <img src={logo} alt="picture" style={{"height":70,"width":60}}/>
-                                    {/* 图片 */}
-                                    <div>电影名</div>
+                                    <img src={moviesData[index][1]['image']} alt="picture" style={{"height":70,"width":60}}/>
+                                    <div>{moviesData[index][1]['name']}</div>
                                 </div>
                                 
                                 <div style={{"display":"inline","float":"left","margin":30}}>
-                                    <img src={logo} alt="picture" style={{"height":70,"width":60}}/>
-                                    {/* 图片 */}
-                                    <div>电影名</div>
+                                    <img src={moviesData[index][2]['image']} alt="picture" style={{"height":70,"width":60}}/>
+                                    <div>{moviesData[index][2]['name']}</div>
                                 </div>
                             </div>
                             <InputNumber min={0} max={3} defaultValue={0} onChange={onChange.bind(this,index)} />
