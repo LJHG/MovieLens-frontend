@@ -1,21 +1,19 @@
 import React from 'react'
-import {
-    Switch, Route, HashRouter as Router
-} from 'react-router-dom'
-import PickGroups from '../pages/pick_groups'
-import HomePage from '../pages/HomePage'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import ErrorPage from '../pages/ErrorPage'
+import HomePage from '../pages/HomePage'
+import PickGroups from '../pages/PickGroups'
 
-const PageRouter = () =>{
-    return (
-        <Router>
-            <Switch>
-                <Route component={PickGroups} path='/profile/settings/pick-groups' exact/>
-                <Route component={HomePage} path='/' exact/>
-                <Route component={ErrorPage}  />
-            </Switch>
-        </Router>
-    )
+const PageRouter = () => {
+  return (
+    <Router>
+      <Switch>
+        <Route component={PickGroups} path='/profile/settings/pick-groups' exact />
+        <Route component={HomePage} path='/' exact />
+        <Route component={ErrorPage} />
+      </Switch>
+    </Router>
+  )
 
 }
 
