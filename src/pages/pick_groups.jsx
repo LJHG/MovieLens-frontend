@@ -8,6 +8,7 @@ import { InputNumber } from 'antd';
 import { Button } from 'antd';
 import axios from 'axios'
 import {host} from "../config"
+import MovieItem from "../components/MovieItem"
 
 const groups = [
     {'tags':['sci-fi','surreal','space']},
@@ -85,6 +86,7 @@ const PickGroups = () =>{
 
     return (
         <div className="movielens-content-container">
+            <MovieItem/>
             <Row>
                 {
                     groups.map((item,index)=>{
