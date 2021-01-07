@@ -20,6 +20,7 @@ const PageLayout = () => {
     axios.get(host+'/profile/settings/change-mode/'+m).then((res)=>{
       if(res.data.code === 0){
         setMode(m)
+        window.location.href = '/'
       }else{
         alert(res.data.msg);
       }
@@ -27,7 +28,7 @@ const PageLayout = () => {
       alert(e);
     })
 
-    window.location.href = '/'
+    
   }
   
   useEffect(()=>{
