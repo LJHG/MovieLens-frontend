@@ -23,7 +23,7 @@ const DetailContent = ({ movieInfo }) => {
       <p style={{ margin: 2 }}>预测评分</p>
       <p>
         <StarTwoTone twoToneColor="#ff3d00" />
-        <span style={{ marginLeft: 5 }}>4/5</span>
+        <span style={{ marginLeft: 5 }}>{movieInfo['predict'].toFixed(1)}/5</span>
       </p>
       <p style={{ marginBottom: 5 }}>类型</p>
       <Row gutter={[2, 4]}>
