@@ -72,7 +72,7 @@ const MovieInfoPage = ({ match }) => {
     "imdbId": "0114709",
     "tmdbId": "862",
     "name": "Toy Story",
-    "image": "https://m.media-amazon.com/images/M/MV5BMDU2ZWJlMjktMTRhMy00ZTA5LWEzNDgtYmNmZTEwZTViZWJkXkEyXkFqcGdeQXVyNDQ2OTk4MzI@._V1_.jpg",
+    "image": "",
     "genre": ["Adventure", "Animation", "Children", "Comedy", "Fantasy"],
     "contentRating": "G",
     "actor": [{ "@type": "Person", "url": "/name/nm0000158/", "name": "Tom Hanks" },
