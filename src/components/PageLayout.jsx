@@ -38,7 +38,7 @@ const PageLayout = () => {
                 </Link>
                 </Menu.Item>
                 <Menu.Item key="my_rating" icon={<HeartOutlined />}>
-                  <Link to="/profile/about-your-ratings">
+                  <Link to="/profile/rates">
                     我的评分
                 </Link>
                 </Menu.Item>
