@@ -1,4 +1,4 @@
-import { Button, Card, InputNumber, Row, Col, PageHeader, Typography, Statistic } from 'antd';
+import { Button, Card, Row, Col, PageHeader, Typography, Statistic } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { host,genMovieUrl } from "../config";
@@ -63,7 +63,7 @@ const PickGroups = () => {
     //先扫一遍，确保不是全0
     let allZero = 1;
     for (let i = 0; i < 6; i++) {
-      if (points[i] != 0)
+      if (points[i] !== 0)
         allZero = 0;
     }
     if (allZero) {
@@ -79,7 +79,7 @@ const PickGroups = () => {
       }
 
       axios.post(host + '/profile/settings/pick-groups', data).then(res => {
-        if (res.data.code == 0) {
+        if (res.data.code === 0) {
           //返回正确，跳转回首页
           alert('类别点数分配成功!')
           window.location.href = '/#'
@@ -101,7 +101,6 @@ const PickGroups = () => {
           <Statistic value={Npoints} style={{ width: "50px", paddingLeft: "10px" }} formatter={(value) => <span style={{ color: "#F06624" }}>{value}</span>} />
         </div>
       </PageHeader>
-      <MovieItem/>
       <div style={{ padding: "0 24px" }}>
         <Row gutter={[16, 16]}>
           {
@@ -117,7 +116,7 @@ const PickGroups = () => {
                         moviesData[index].map((item, _index) => {
                           return (
                             <Col className="group-item" key={_index}>
-                              <img src={genMovieUrl(item['image'])} alt="picture" style={{ "height": 90, "width": 60 }} />
+                              <img src={genMovieUrl(item['image'])} alt="movie-logo" style={{ "height": 90, "width": 60 }} />
                               <div className="group-representer-title">{item['name']}</div>
                             </Col>
                           )
