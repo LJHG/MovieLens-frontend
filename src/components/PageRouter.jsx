@@ -7,6 +7,7 @@ import MovieInfoPage from '../pages/MovieInfoPage'
 import TopPicks from '../pages/TopPicks'
 import RateMore from '../pages/RateMore'
 import Genres from '../pages/Genres'
+import SimilarMoviesPage from "../pages/SimilarMoviesPage"
 
 const PageRouter = () => {
   return (
@@ -17,6 +18,7 @@ const PageRouter = () => {
         <Route component={TopPicks} path='/explore/top-picks' exact/>
         <Route component={RateMore} path='/explore/rate-more' exact/>
         <Route component={Genres} path='/explore/genres/:genre' exact/>
+        <Route component={SimilarMoviesPage} path='/movies/:movieId/similar' exact/>
         <Route component={HomePage} path='/' exact />
         <Route component={ErrorPage} />
       </Switch>
