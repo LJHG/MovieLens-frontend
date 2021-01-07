@@ -67,4 +67,9 @@ code {
   flex-direction: row;
 }
 
+.movieInfo-sub-content{
+  background-color:white;
+  margin-top:12px;
+  padding:12px;
+}
 
