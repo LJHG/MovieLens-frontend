@@ -6,11 +6,14 @@ import axios from 'axios'
 
 const { Title } = Typography
 
-const TopPicks = () => {
+const Genres = ({match}) => {
+  // console.log(prop)
+  const genre = match.params.genre
+  // console.log(genre)
   const [data,setData] = useState([])
 
   useEffect(() => {
-    axios.get(`${host}/explore/top-picks/1`).then(res => {
+    axios.get(`${host}/explore/genres/${genre}/1`).then(res => {
       // console.log(res.data.data);
       if(res.data.code !== 0){
         console.log(res.data.msg)
@@ -20,10 +23,11 @@ const TopPicks = () => {
     }).catch((e) => {
       alert(e)
     })
-  }, [])
+  }, [genre])
 
   const pageChange = (page,pageSize)=>{
-    axios.get(`${host}/explore/top-picks/${page}`).then(res => {
+    console.log(page)
+    axios.get(`${host}/explore/genres/${genre}/${page}`).then(res => {
       // console.log(res.data.data);
       if(res.data.code !== 0){
         console.log(res.data.msg)
@@ -38,8 +42,8 @@ const TopPicks = () => {
   return (
     <>
       <PageHeader>
-        <p className="page-header-text">LensMovie recommends these movies</p>
-        <Title level={1}>Top picks</Title>
+        <p className="page-header-text">browsing by genre</p>
+        <Title level={1}>{genre}</Title>
       </PageHeader>
       <div style={{ padding: "0 24px" }}>
         <Row gutter={[10, 30]}>
@@ -59,4 +63,4 @@ const TopPicks = () => {
   )
 }
 
-export default TopPicks
+export default Genres

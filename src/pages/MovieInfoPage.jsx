@@ -7,7 +7,7 @@ import {
     StarFilled
 } from '@ant-design/icons';
 import { WordCloud } from '@ant-design/charts';
-import axios from 'axios';
+import {axios} from 'axios';
 import {host} from '../config'
 import MovieItem from '../components/MovieItem'
 
