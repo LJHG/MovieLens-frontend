@@ -11,7 +11,7 @@ const PageRouter = () => {
     <Router>
       <Switch>
         <Route component={PickGroups} path='/profile/settings/pick-groups' exact />
-        <Route component={MovieInfoPage} path='/movies/*' exact />
+        <Route component={MovieInfoPage} path='/movies/:movieId' exact />
         <Route component={MovieList} path='/explore/*' exact/>
         <Route component={HomePage} path='/' exact />
         <Route component={ErrorPage} />

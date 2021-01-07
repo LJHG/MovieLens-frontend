@@ -8,23 +8,20 @@ import {
 } from '@ant-design/icons';
 import { WordCloud } from '@ant-design/charts';
 import axios from 'axios';
-import {host} from '../config'
+import {host,genMovieUrl} from '../config'
 import MovieItem from '../components/MovieItem'
+
 
 
 
 const { Title } = Typography;
 
 
-const DemoWordCloud = () => {
+const DemoWordCloud = ({movieId}) => {
   
     const [data, setData] = useState([]);
+
     useEffect(() => {
-        asyncFetch();
-    }, []);
-    
-    const movieId = 1
-    const asyncFetch = () => {
         axios.get(host+'/movies/'+movieId+'/tags').then((res)=>{
             const tag_list  = res.data.data.tag_list;
             const random_nums_list_60 = [];
@@ -43,7 +40,8 @@ const DemoWordCloud = () => {
         }).catch((e)=>{
             alert(e);
         })
-    };
+    }, [movieId]);
+          
     var config = {
         data: data,
         wordField: 'x',
@@ -65,11 +63,12 @@ const DemoWordCloud = () => {
 
 
 
-const MovieInfoPage = () =>{
-    
+const MovieInfoPage = ({match}) =>{
+
+    const mid = match.params.movieId
     //根据当前url解析出movieid，然后向后台请求movieInfo
     //这里先临时写一个movieInfo
-    const movieInfo = {
+    const tmpMovieInfo = {
         "_id": 1, 
         "innerId": 42, 
         "imdbId": "0114709", 
@@ -102,6 +101,7 @@ const MovieInfoPage = () =>{
         "thumbnail": { "@type": "ImageObject", "contentUrl": "https://m.media-amazon.com/images/M/MV5BMjAwOTYzODExMF5BMl5BanBnXkFtZTcwNDYyNjc4Mg@@._V1_.jpg" }, 
         "thumbnailUrl": "https://m.media-amazon.com/images/M/MV5BMjAwOTYzODExMF5BMl5BanBnXkFtZTcwNDYyNjc4Mg@@._V1_.jpg", 
         "description": "Toy Story/Toy Story 2: #D Double Feature", "uploadDate": "2009-10-02T17:32:07Z" }, 
+        "predict": 2.5,
         "review": { "@type": "Review", 
                     "itemReviewed": { "@type": "CreativeWork", "url": "/title/tt0114709/" }, 
                     "author": { "@type": "Person", "name": "alexkolokotronis" }, 
@@ -113,27 +113,52 @@ const MovieInfoPage = () =>{
                 } 
         }
 
-    const [moviePredictRating,setMoivePredictRating] = useState(0)
+    const [movieInfo,setMovieInfo] = useState(tmpMovieInfo)
+    const [similarMovies,setSimilarMovies] = useState([1, 2, 3, 4, 5, 6, 7, 8])
 
     useEffect(()=>{
-        //获取moviePredictRating
-        setMoivePredictRating(3.5)
-    },[])
+        //解析url
+        const movieId = window.location.href.split('/').slice(-1)[0];
 
-    const movies = [1, 2, 3, 4, 5, 6, 7, 8]
+        //获取电影信息
+        axios.get(host+'/movies/'+movieId).then((res)=>{
+            setMovieInfo(res.data.data)
+        }).catch((e)=>{
+            alert(e)
+        })
+
+        //获取相似电影id列表
+        axios.get(host+'/movies/'+movieId+'/similar').then((res)=>{
+            if(res.data.code === 0){
+
+                const movies_list = []
+                res.data.data.map((item,index)=>{
+                    movies_list.push(item['movieId'])
+                })
+                setSimilarMovies(movies_list);
+            }else{
+                alert(res.data.msg);
+            }
+        }).catch((e)=>{
+            alert(e)
+        })
+
+    },[mid])
+
     const tag_colors = ['#f50', '#2db7f5', '#87d068', '#108ee9']
     return(
         <div>
             <div className='movieInfo-sub-content'>
                 <Row gutter={4}>
                     <Col span={8} offset={1}>
-                        <img src={movieInfo['image']} alt="" style={{height:400,padding:20}}/>
+                        <img src={genMovieUrl(movieInfo['image'])} alt="" style={{height:400,padding:20}}/>
                     </Col>
                     <Col span={13}>
                         <Title>{movieInfo['name']}</Title>
                         <Row>
                             <Col span={12}>
-                            <Rate allowHalf defaultValue={0} value={moviePredictRating} onChange={(value)=>{
+                            {/* value={movieInfo['predict'].toFixed(1)} */}
+                            <Rate allowHalf defaultValue={0} onChange={(value)=>{
                                 const data = {'movieId':movieInfo['_id'],'rating':value}
                                 axios.post(host+'/profile/rate',data).then((res)=>{
                                     if(res.data.code !== 0){
@@ -146,7 +171,7 @@ const MovieInfoPage = () =>{
                                 <div style={{marginTop:12}}>
                                     <p style={{ margin: 2 }}>由LensMovie提供的预测评分</p>
                                     <StarFilled />
-                                    <span style={{marginLeft:5}}>{moviePredictRating}/5</span>
+                                    <span style={{marginLeft:5}}>{movieInfo['predict'].toFixed(1)}/5</span>
                                 </div>
                                 <div style={{marginTop:12}}>
                                     <p style={{ margin: 2 }}>用户评分</p>
@@ -221,7 +246,7 @@ const MovieInfoPage = () =>{
                    <Title level={2}>相关标签</Title>
                 </div>
                 <div style={{height:200,marginLeft:100,marginRight:100}}>
-                    <DemoWordCloud/>
+                    <DemoWordCloud movieId={movieInfo['_id']}/>
                 </div>
             </div>
             <div className='movieInfo-sub-content'>
@@ -231,7 +256,7 @@ const MovieInfoPage = () =>{
                 <div style={{ padding: "0px 24px",marginLeft:30,marginRight:30 }}>
                     <Row gutter={[6, 0]}>
                     {
-                        movies.map((value, index) => {
+                        similarMovies.map((value, index) => {
                         return (
                             <Col key={index} span={3}>
                             <MovieItem movieId={value} />
