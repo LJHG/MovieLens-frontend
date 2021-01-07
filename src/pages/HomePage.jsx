@@ -3,6 +3,7 @@ import React,{useEffect,useState} from 'react';
 import MovieItem from '../components/MovieItem';
 import {host} from '../config'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 const { Title } = Typography
 
@@ -33,7 +34,7 @@ const HomePage = () => {
             {/* top-picks */}
             <PageHeader>
                 {/* <p className="page-header-text">browsing by genre</p> */}
-                <Title level={1}>Top Picks</Title>
+                <Title level={1}><Link to="/explore/top-picks"><span style={{color:"black"}}>Top picks</span></Link></Title>
             </PageHeader>
             <div style={{ padding: "0 24px" }}>
                 <Row gutter={[10, 30]}>
@@ -51,7 +52,7 @@ const HomePage = () => {
             {/* rate-more */}
             <PageHeader>
                 {/* <p className="page-header-text">browsing by genre</p> */}
-                <Title level={1}>Rate More</Title>
+                <Title level={1}><Link to="/explore/rate-more"><span style={{color:"black"}}>Rate More</span></Link></Title>
             </PageHeader>
             <div style={{ padding: "0 24px" }}>
                 <Row gutter={[10, 30]}>

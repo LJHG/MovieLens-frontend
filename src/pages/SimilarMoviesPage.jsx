@@ -40,7 +40,7 @@ const SimilarMoviesPage = ({match}) => {
         }).catch((e) => {
             alert(e)
         })
-    }, [])
+    }, [movieId])
 
     const pageChange = (page, pageSize) => {
         axios.get(`${host}/movies/${movieId}/similar/${page}`).then(res => {
@@ -59,7 +59,7 @@ const SimilarMoviesPage = ({match}) => {
         <>
             <PageHeader>
                 <p className="page-header-text">LensMovie recommends these movies</p>
-                <Title level={2}>与 {curMovieName} 相似的电影</Title>
+                <Title level={2}>More movies like '{curMovieName}' </Title>
             </PageHeader>
             <div style={{ padding: "0 24px" }}>
                 <Row gutter={[10, 30]}>

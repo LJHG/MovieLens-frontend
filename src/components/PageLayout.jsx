@@ -19,7 +19,7 @@ const PageLayout = () => {
               <div className="logo-container">
                 <Link to="/">
                   <img src={logo} alt="logo" className="logo-img" />
-                  <span className="logo-text">lensMovie</span>
+                  <span className="logo-text">LensMovie</span>
                 </Link>
               </div>
               {/* <Search
@@ -34,18 +34,18 @@ const PageLayout = () => {
               <Menu mode="horizontal" theme="light">
                 <Menu.Item key="pick_groups" icon={<PlusSquareOutlined />}>
                   <Link to="/profile/settings/pick-groups">
-                    选择分组
+                    Choose categories
                 </Link>
                 </Menu.Item>
                 <Menu.Item key="my_rating" icon={<HeartOutlined />}>
                   <Link to="/profile/rates">
-                    我的评分
+                    My ratings
                 </Link>
                 </Menu.Item>
-                <SubMenu key="SubMenu" icon={<SettingOutlined />} title="切换推荐模式">
-                  <Menu.Item key="setting:1">模式1</Menu.Item>
-                  <Menu.Item key="setting:2">模式2</Menu.Item>
-                  <Menu.Item key="setting:3">模式3</Menu.Item>
+                <SubMenu key="SubMenu" icon={<SettingOutlined />} title="Change mode">
+                  <Menu.Item key="setting:1">mode 1</Menu.Item>
+                  <Menu.Item key="setting:2">mode 2</Menu.Item>
+                  <Menu.Item key="setting:3">mode 3</Menu.Item>
                 </SubMenu>
               </Menu>
             </div>
