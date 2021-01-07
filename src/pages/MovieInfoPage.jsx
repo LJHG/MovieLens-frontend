@@ -9,6 +9,7 @@ import {
 import { WordCloud } from '@ant-design/charts';
 import axios from 'axios';
 import {host} from '../config'
+import MovieItem from '../components/MovieItem'
 
 
 
@@ -119,7 +120,7 @@ const MovieInfoPage = () =>{
         setMoivePredictRating(3.5)
     },[])
 
-
+    const movies = [1, 2, 3, 4, 5, 6, 7, 8]
     const tag_colors = ['#f50', '#2db7f5', '#87d068', '#108ee9']
     return(
         <div>
@@ -227,8 +228,18 @@ const MovieInfoPage = () =>{
                 <div style={{marginLeft:60}}>
                    <Title level={2}>相似电影</Title>
                 </div>
-                <div>
-                    相似电影
+                <div style={{ padding: "0px 24px",marginLeft:30,marginRight:30 }}>
+                    <Row gutter={[6, 0]}>
+                    {
+                        movies.map((value, index) => {
+                        return (
+                            <Col key={index} span={3}>
+                            <MovieItem />
+                            </Col>
+                        )
+                        })
+                    }
+                    </Row>
                 </div>
             </div>
 
