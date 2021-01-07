@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { host, genMovieUrl } from "../config";
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons'
-import MovieItem from '../components/MovieItem';
+import MovieItem from './MovieItem';
 
 const { Title } = Typography
 
@@ -15,10 +15,6 @@ const MovieList = () => {
       <PageHeader>
         <Title level={1}>pick movie groups</Title>
         <p className="page-header-text">Distribute 3 points among your favorite groups of movies below to enable or reconfigure the "bard" recommender.</p>
-        <div className="group-points-statistic">
-          <span className="page-header-text" style={{ height: "30px", marginTop: "auto" }}>Remaining points: </span>
-          {/* <Statistic value={Npoints} style={{ width: "50px", paddingLeft: "10px" }} formatter={(value) => <span style={{ color: "#F06624" }}>{value}</span>} /> */}
-        </div>
       </PageHeader>
       <div style={{ padding: "0 24px" }}>
         <Row gutter={[6, 50]}>
@@ -26,7 +22,7 @@ const MovieList = () => {
             movies.map((value, index) => {
               return (
                 <Col key={index} span={4}>
-                  <MovieItem />
+                  <MovieItem movieId={value}/>
                 </Col>
               )
             })

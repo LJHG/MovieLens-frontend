@@ -3,7 +3,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { host,genMovieUrl } from "../config";
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons'
-import MovieItem from '../components/MovieItem';
 
 const { Title } = Typography
 
@@ -36,7 +35,7 @@ const PickGroups = () => {
 
   useEffect(() => {
     //获取6类18部电影的相关信息
-    axios.get(host + '/profile/setting/get-groups-info').then(res => {
+    axios.get(host + '/profile/settings/get-groups-info').then(res => {
       console.log(res.data.data);
       setMoviesData(res.data.data);
     }).catch((e) => {

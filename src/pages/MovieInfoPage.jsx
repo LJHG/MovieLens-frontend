@@ -27,14 +27,14 @@ const DemoWordCloud = () => {
         axios.get(host+'/movies/'+movieId+'/tags').then((res)=>{
             const tag_list  = res.data.data.tag_list;
             const random_nums_list_60 = [];
-            for(var i =0;i<60;i++){
+            for(let i =0;i<60;i++){
                 random_nums_list_60.push(Math.ceil(Math.random()*1000))
             }
             random_nums_list_60.sort(function(a,b){
                 return b-a;
             })
             const temp_data = []
-            for(var i =0;i<60;i++){
+            for(let i =0;i<60;i++){
                 temp_data.push({'x':tag_list[i],'value':random_nums_list_60[i]})
             }
             setData(temp_data)
@@ -135,7 +135,7 @@ const MovieInfoPage = () =>{
                             <Rate allowHalf defaultValue={0} value={moviePredictRating} onChange={(value)=>{
                                 const data = {'movieId':movieInfo['_id'],'rating':value}
                                 axios.post(host+'/profile/rate',data).then((res)=>{
-                                    if(res.data.code != 0){
+                                    if(res.data.code !== 0){
                                         alert(res.data.msg);
                                     }
                                 }).catch((e)=>{
