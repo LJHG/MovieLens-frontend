@@ -1,15 +1,11 @@
 import { HeartOutlined, PlusSquareOutlined, SettingOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
-import { Layout, Menu, Row, Col, Typography,Input,PageHeader } from 'antd';
+import { Layout, Menu, Row, Col } from 'antd';
 import React from 'react';
 import logo from '../images/logo.png';
 import PageRouter from './PageRouter';
 
-const { Header, Footer, Sider, Content } = Layout;
-
-const { Title } = Typography
-
-const {Search} = Input
+const { Header, Footer, Content } = Layout;
 
 const { SubMenu } = Menu;
 
