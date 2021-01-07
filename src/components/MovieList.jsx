@@ -1,8 +1,5 @@
-import { Button, Card, Row, Col, PageHeader, Typography, Statistic } from 'antd';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { host, genMovieUrl } from "../config";
-import { PlusOutlined, MinusOutlined } from '@ant-design/icons'
+import { Row, Col, PageHeader, Typography } from 'antd';
+import React from 'react';
 import MovieItem from './MovieItem';
 
 const { Title } = Typography

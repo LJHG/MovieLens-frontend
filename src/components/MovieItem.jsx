@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Col, Rate, Row, Dropdown, Tag, Card, Typography, Popover } from 'antd';
+import { Col, Rate, Row, Tag, Card, Typography, Popover } from 'antd';
 import {
-  StarTwoTone,
-  StarFilled
-} from '@ant-design/icons';
+  StarTwoTone} from '@ant-design/icons';
 import { genMovieUrl, host } from '../config';
 import { Link } from 'react-router-dom';
 import axios from 'axios';

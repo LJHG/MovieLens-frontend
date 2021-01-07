@@ -234,7 +234,7 @@ const MovieInfoPage = () =>{
                         movies.map((value, index) => {
                         return (
                             <Col key={index} span={3}>
-                            <MovieItem />
+                            <MovieItem movieId={value} />
                             </Col>
                         )
                         })
